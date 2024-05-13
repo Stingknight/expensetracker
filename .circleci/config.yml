@@ -61,8 +61,15 @@ jobs:
     steps:
       # Replace this with steps to deploy to users
       - run:
-          name: deploy
-          command: '#e.g. ./deploy.sh'
+        - checkout
+        - setup_remote_docker:
+            docker_layer_caching: false
+        - run:
+          name: Build docker image
+          command:
+            docker build -t adithyaudupa123/expense_tracker:latest
+            echo $DOCKER_PASSWORD |  docker login -u adithyaudupa123 --password-stdin 
+            docker push adithyaudupa123/expense_tracker:latest
 workflows:
   build-and-test:
     jobs:
@@ -70,6 +77,6 @@ workflows:
       - build-go-executables:
           requires:
             - test-go
-    # - deploy:
-    #     requires:
-    #       - build-go-executables
+      - deploy:
+          requires:
+            - build-go-executables
