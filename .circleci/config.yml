@@ -65,11 +65,11 @@ jobs:
         - setup_remote_docker:
             docker_layer_caching: false
         - run:
-          name: Build docker image
-          command:
-            docker build -t adithyaudupa123/expense_tracker:latest
-            echo $DOCKER_PASSWORD |  docker login -u adithyaudupa123 --password-stdin 
-            docker push adithyaudupa123/expense_tracker:latest
+            name: Build and push docker image
+            command: |
+              docker build -t adithyaudupa123/expense_tracker:latest
+              echo $DOCKER_PASSWORD |  docker login -u $DOCKER_USER --password-stdin 
+              docker push adithyaudupa123/expense_tracker:latest
 workflows:
   build-and-test:
     jobs:
