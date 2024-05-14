@@ -67,7 +67,7 @@ jobs:
       - run:
           name: Build and push docker image
           command: |
-            docker build -t adithyaudupa123/expense_tracker:latest
+            docker build -t adithyaudupa123/expense_tracker:latest ./
             echo $DOCKER_PASSWORD |  docker login -u $DOCKER_USER --password-stdin 
             docker push adithyaudupa123/expense_tracker:latest
 workflows:
