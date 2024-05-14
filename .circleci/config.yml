@@ -54,7 +54,7 @@ jobs:
       - store_artifacts:
           path: ~/artifacts
           destination: executables
-  deploy:
+  build_docker_image:
     # This is an example deploy job, not actually used by the workflow
     docker:
       - image: cimg/base:stable
@@ -77,6 +77,6 @@ workflows:
       - build-go-executables:
           requires:
             - test-go
-      - deploy:
+      - build_docker_image:
           requires:
             - build-go-executables
