@@ -60,16 +60,16 @@ jobs:
       - image: cimg/base:stable
     steps:
       # Replace this with steps to deploy to users
+      
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: false
       - run:
-        - checkout
-        - setup_remote_docker:
-            docker_layer_caching: false
-        - run:
-            name: Build and push docker image
-            command: |
-              docker build -t adithyaudupa123/expense_tracker:latest
-              echo $DOCKER_PASSWORD |  docker login -u $DOCKER_USER --password-stdin 
-              docker push adithyaudupa123/expense_tracker:latest
+          name: Build and push docker image
+          command: |
+            docker build -t adithyaudupa123/expense_tracker:latest
+            echo $DOCKER_PASSWORD |  docker login -u $DOCKER_USER --password-stdin 
+            docker push adithyaudupa123/expense_tracker:latest
 workflows:
   build-and-test:
     jobs:
