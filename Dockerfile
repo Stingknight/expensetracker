@@ -21,3 +21,4 @@ EXPOSE 9040
 
 # Run the application
 CMD ["./main", "-addr=:9040"]
+
